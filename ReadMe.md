@@ -1,4 +1,4 @@
-<h2>This is my submission for SUNY ALBANY'S ICSI 518's Lab Assignments</h2>
+<h2>This is my submission for SUNY ALBANY ICSI 518's Lab Assignments</h2>
 <h2>Satwik Bhasin | Student ID: 001570802</h2>
 
 Hi, my name is Satwik Bhasin. I am 22 years old and was born in India.
