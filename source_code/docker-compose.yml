@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+
+  client-end:
+    container_name: client-end
+    build: 
+      context: ./client-end
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      port: 3000
+ 
+  back-end:
+    container_name: back-end
+    build: 
+      context: ./back-end
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongo
+    links:
+      - mongo
+  
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    volumes:
+      - mongo-data:/data/db
+    ports: 
+      - "27017:27017"
+
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./site:/srv
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  mongo-data:
+  caddy_data:
+  caddy_config:

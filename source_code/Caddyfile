@@ -1,0 +1,5 @@
+http://ec2-3-144-142-14.us-east-2.compute.amazonaws.com:80 {
+  reverse_proxy client-end:3000 { 
+    header_down Strict-Transport-Security max-age=31536000;
+  }
+}
