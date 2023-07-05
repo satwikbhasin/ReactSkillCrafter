@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col, Tab, Tabs } from "react-bootstrap";
-import axios from "axios";
+import { loginAPI, signUpAPI } from "../services/loginSystemAPI's";
 
 const LoginSystem = () => {
   const [firstName, setFirstName] = useState("");
@@ -18,24 +18,8 @@ const LoginSystem = () => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    if (isLogin) loginAPI();
-    else signUpAPI();
-  };
-
-  const clearForm = () => {
-    setEmail("");
-    setPassword("");
-    setFirstName("");
-    setLastName("");
-  };
-
-  const loginAPI = () => {
-    axios
-      .post("http://localhost:3001/login/", {
-        email: email,
-        password: password,
-      })
-      .then((response) => {
+    if (isLogin) {
+      loginAPI(email, password).then((response) => {
         if (response.data.isValid) {
           alert("Login Successful for: " + response.data.firstName);
           setSessionActive(true);
@@ -46,19 +30,8 @@ const LoginSystem = () => {
           clearForm();
         }
       });
-  };
-
-  const signUpAPI = () => {
-    console.log(email);
-    axios
-      .post("http://localhost:3001/signup/", {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-      })
-      .then((response) => {
-        console.log(response);
+    } else
+      signUpAPI(firstName, lastName, email, password).then((response) => {
         if (response.data.success) {
           alert(response.data.message);
           setIsLogin(true);
@@ -68,6 +41,13 @@ const LoginSystem = () => {
           clearForm();
         }
       });
+  };
+
+  const clearForm = () => {
+    setEmail("");
+    setPassword("");
+    setFirstName("");
+    setLastName("");
   };
 
   return (

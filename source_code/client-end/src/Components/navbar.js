@@ -17,8 +17,12 @@ export const NavBar = () => {
         />
         <text className="ms-2">Satwik Bhasin - ICSI 518 Lab Assignments</text>
       </Navbar.Brand>
-      <Nav className="">
-        <NavDropdown title="Assignments" id="assignments-dropdown">
+      <Nav>
+        <NavDropdown
+          title="Assignments"
+          id="assignments-dropdown"
+          menuVariant="dark"
+        >
           <NavDropdown.Item href="/assignment1">Assignment 1</NavDropdown.Item>
           <NavDropdown.Item href="/assignment2">Assignment 2</NavDropdown.Item>
           <NavDropdown.Item href="/assignment3">Assignment 3</NavDropdown.Item>

@@ -9,6 +9,7 @@ const ThirdPartyAPI = () => {
       .then((response) => response.json())
       .then((data) => setProducts(data));
   }, []);
+
   return (
     <>
       <Table>

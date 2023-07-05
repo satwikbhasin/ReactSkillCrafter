@@ -1,22 +1,19 @@
 import React, { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import axios from "axios";
 import NavBar from "../components/navbar";
 import satwik from "../assets/satwik.jpeg";
+import backendAddition from "../services/assignmnt1API's";
 
 const Assignment1 = () => {
-  const [first, firstInput] = useState(null); //first number to be added
-  const [second, secondInput] = useState(null); //second number to be added
+  const [first, setFirst] = useState(null); //first number to be added
+  const [second, setSecond] = useState(null); //second number to be added
   const [clientendResult, setClientendResult] = useState(null); //sum calculated on client end(REACT)
   const [backendResult, setBackendResult] = useState(null); //sum calculated on back end(EXPRESS)
 
   function backEndAddition(e) {
-    axios
-      .get(`http://localhost:3001/add/${first}/and/${second}/`)
-      .then((response) => {
-        setBackendResult(Number(response.data.sum));
-        console.log(response.sum);
-      });
+    backendAddition(first, second).then((response) => {
+      setBackendResult(Number(response.data.sum));
+    });
   }
 
   function frontEndAddition(e) {
@@ -87,7 +84,7 @@ const Assignment1 = () => {
                   <Form.Control
                     class="form-control form-control-sm"
                     onChange={(event) => {
-                      firstInput(event.target.value);
+                      setFirst(event.target.value);
                     }}
                   />
                 </Form.Group>
@@ -103,7 +100,7 @@ const Assignment1 = () => {
                   <Form.Control
                     class="form-control form-control-sm"
                     onChange={(event) => {
-                      secondInput(event.target.value);
+                      setSecond(event.target.value);
                     }}
                   />
                 </Form.Group>
