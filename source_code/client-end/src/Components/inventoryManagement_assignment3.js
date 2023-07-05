@@ -7,7 +7,7 @@ import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
 import Table from "react-bootstrap/esm/Table";
 
-const UpdatedInventoryManagement = () => {
+const InventoryManagement = () => {
   const [productList, setProductLists] = useState([]);
   const [productName, setProductName] = useState("");
   const [productQuantity, setProductQuantity] = useState("");
@@ -254,4 +254,4 @@ const UpdatedInventoryManagement = () => {
   );
 };
 
-export default UpdatedInventoryManagement;
+export default InventoryManagement;

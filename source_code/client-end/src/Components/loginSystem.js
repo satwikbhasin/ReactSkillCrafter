@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Button, Container, Row, Col, Tab, Tabs } from "react-bootstrap";
 import axios from "axios";
 
-const UserModule = () => {
+const LoginSystem = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,22 +15,6 @@ const UserModule = () => {
     email: "",
   };
   const [userSignature, setUserSignature] = useState(userDetails);
-
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
-  };
-
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
-  };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -86,15 +70,6 @@ const UserModule = () => {
       });
   };
 
-  const toggleForm = () => {
-    setIsLogin(!isLogin);
-  };
-
-  const handleLogout = () => {
-    setUserSignature(userDetails);
-    setSessionActive(false);
-  };
-
   return (
     <div>
       <Tabs
@@ -123,7 +98,9 @@ const UserModule = () => {
                                 type="name"
                                 placeholder="Enter First name"
                                 value={firstName}
-                                onChange={handleFirstNameChange}
+                                onChange={() => {
+                                  setFirstName(event.target.value);
+                                }}
                                 className="mb-3"
                               />
                               <Form.Label> Last Name</Form.Label>
@@ -131,7 +108,9 @@ const UserModule = () => {
                                 type="name"
                                 placeholder="Enter Last name"
                                 value={lastName}
-                                onChange={handleLastNameChange}
+                                onChange={() => {
+                                  setLastName(event.target.value);
+                                }}
                                 className="mb-3"
                               />
                             </Form.Group>
@@ -142,7 +121,9 @@ const UserModule = () => {
                               type="email"
                               placeholder="Enter email"
                               value={email}
-                              onChange={handleEmailChange}
+                              onChange={() => {
+                                setEmail(event.target.value);
+                              }}
                               className="mb-3"
                             />
                           </Form.Group>
@@ -152,7 +133,9 @@ const UserModule = () => {
                               type="password"
                               placeholder="Password"
                               value={password}
-                              onChange={handlePasswordChange}
+                              onChange={() => {
+                                setPassword(event.target.value);
+                              }}
                             />
                           </Form.Group>
                           <Row className="text-center">
@@ -169,7 +152,9 @@ const UserModule = () => {
                           <Button
                             className="mt-3 btn btn-outline-dark btn-sm"
                             variant=""
-                            onClick={toggleForm}
+                            onClick={() => {
+                              setIsLogin(!isLogin);
+                            }}
                           >
                             {isLogin
                               ? "Need to create an account?"
@@ -204,7 +189,13 @@ const UserModule = () => {
                           {userSignature.lastName}
                         </p>
                         <p>Email: {userSignature.email}</p>
-                        <Button variant="dark" onClick={handleLogout}>
+                        <Button
+                          variant="dark"
+                          onClick={() => {
+                            setUserSignature(userDetails);
+                            setSessionActive(false);
+                          }}
+                        >
                           Logout
                         </Button>
                       </div>
@@ -224,4 +215,4 @@ const UserModule = () => {
   );
 };
 
-export default UserModule;
+export default LoginSystem;
