@@ -9,7 +9,7 @@ const Landing = () => {
     <>
       <NavBar />
       <Row>
-        <h1 className="text-center m-5 text-success2">
+        <h1 className="text-center m-5 text-success">
           Please Select an assignment from the drop down!
         </h1>
       </Row>
