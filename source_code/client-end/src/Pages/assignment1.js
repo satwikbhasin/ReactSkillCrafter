@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
-import NavBar from "../Components/navbar";
+import NavBar from "../components/navbar";
 import satwik from "../assets/satwik.jpeg";
 
 const Assignment1 = () => {

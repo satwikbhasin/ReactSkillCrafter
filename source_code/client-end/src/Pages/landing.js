@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import { Form, Button, Row, Col } from "react-bootstrap";
-import axios from "axios";
-import NavBar from "../Components/navbar";
-import satwik from "../assets/satwik.jpeg";
+import React from "react";
+import { Row } from "react-bootstrap";
+import NavBar from "../components/navbar";
 
 const Landing = () => {
   return (

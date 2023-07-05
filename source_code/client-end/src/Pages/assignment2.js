@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Tabs, Tab, Row, Table } from "react-bootstrap";
-import ThirdPartyAPI from "../Components/thirdPartyAPI";
-import InventoryManagement from "../Components/inventoryManagement_assignment2";
-import NavBar from "../Components/navbar";
+import React from "react";
+import { Tabs, Tab, Row } from "react-bootstrap";
+import ThirdPartyAPI from "../components/thirdPartyAPI";
+import InventoryManagement from "../components/inventoryManagement_assignment2";
+import NavBar from "../components/navbar";
 
 const Assignment2 = () => {
   return (

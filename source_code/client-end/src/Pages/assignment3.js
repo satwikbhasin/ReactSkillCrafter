@@ -1,8 +1,8 @@
 import React from "react";
 import { Tabs, Tab, Row } from "react-bootstrap";
-import InventoryManagement from "../Components/inventoryManagement_assignment3";
-import LoginSystem from "../Components/loginSystem";
-import NavBar from "../Components/navbar";
+import InventoryManagement from "../components/inventoryManagement_assignment3";
+import LoginSystem from "../components/loginSystem";
+import NavBar from "../components/navbar";
 
 function Assignment3() {
   return (
