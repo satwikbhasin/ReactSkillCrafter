@@ -12,12 +12,12 @@ const Assignment2 = () => {
         <h1 className="text-center mt-4">Assignment-2</h1>
       </Row>
       <Tabs defaultActiveKey="assignment2-api" className="m-3" fill>
-        <Tab eventKey="assignment2-api" title="Assignment 2 - API">
+        <Tab eventKey="assignment2-api" title="3rd Party API" className="m-4">
           <ThirdPartyAPI />
         </Tab>
         <Tab
           eventKey="assignment2-inventory-management"
-          title="Assignment 2 - Inventory Management"
+          title="Inventory Management"
         >
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Row>

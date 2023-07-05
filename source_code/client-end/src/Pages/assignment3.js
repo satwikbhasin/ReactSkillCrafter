@@ -12,13 +12,13 @@ function Assignment3() {
         <h1 className="text-center mt-4">Assignment-3</h1>
       </Row>
       <Tabs
-        defaultActiveKey="assignment3-updated-inventory-management"
+        defaultActiveKey="assignment3-inventory-management"
         className="m-3"
         fill
       >
         <Tab
           eventKey="assignment3-updated-inventory-management"
-          title="Assignment 3 - Updated Inventory Management"
+          title="Inventory Management"
         >
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Row>
@@ -26,10 +26,7 @@ function Assignment3() {
             </Row>
           </div>
         </Tab>
-        <Tab
-          eventKey="assignment3-user-module"
-          title="Assignment 3 - User Module"
-        >
+        <Tab eventKey="assignment3-user-module" title="Login System">
           <LoginSystem />
         </Tab>
       </Tabs>

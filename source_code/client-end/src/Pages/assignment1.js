@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import NavBar from "../components/navbar";
 import satwik from "../assets/satwik.jpeg";
-import backendAddition from "../services/assignmnt1API's";
+import backendAddition from "../services/assignment1API";
 
 const Assignment1 = () => {
   const [first, setFirst] = useState(null); //first number to be added
