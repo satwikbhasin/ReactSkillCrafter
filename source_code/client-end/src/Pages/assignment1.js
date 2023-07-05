@@ -28,9 +28,7 @@ const Assignment1 = () => {
   return (
     <>
       <NavBar />
-      <Row>
-        <h1 className="text-center mt-4">Assignment-1</h1>
-      </Row>
+      <h1 className="text-center mt-4">Assignment-1</h1>
       <Row className="mb-5">
         <Col className="col-3 ms-5 mt-2">
           <img class="" src={satwik} width={300} height={300} rounded alt="" />
