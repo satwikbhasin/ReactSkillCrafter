@@ -25,7 +25,7 @@ const InventoryManagement = () => {
   const [updatedId, setUpdatedId] = useState("");
 
   useEffect(() => {
-    Axios.get("http://ec2-3-144-142-14.us-east-2.compute.amazonaws.com:3001/retrieve/").then((response) => {
+    Axios.get("http://localhost:3001/retrieve/").then((response) => {
       setProductLists(response.data);
     });
   }, []);
@@ -36,7 +36,7 @@ const InventoryManagement = () => {
 
   // Function to handle form submission for creating new inventory product
   const handleAddInventoryproduct = () => {
-    Axios.post("http://ec2-3-144-142-14.us-east-2.compute.amazonaws.com:3001/insert/", {
+    Axios.post("http://localhost:3001/insert/", {
       productName: productName,
       productQuantity: productQuantity,
       productImage: productImage,
@@ -47,7 +47,7 @@ const InventoryManagement = () => {
 
   // Function to handle form submission for updating an existing inventory product
   const handleUpdateInventoryProduct = () => {
-    Axios.put("http://ec2-3-144-142-14.us-east-2.compute.amazonaws.com:3001/update/", {
+    Axios.put("http://localhost:3001/update/", {
       id: updatedId,
       updatedName: updatedName,
       updatedQuantity: updatedQuantity,

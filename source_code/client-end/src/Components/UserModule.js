@@ -47,7 +47,7 @@ const UserModule = () => {
 
   const loginAPI = () => {
     axios
-      .post("http://ec2-3-144-142-14.us-east-2.compute.amazonaws.com:3001/login/", {
+      .post("http://localhost:3001/login/", {
         email: email,
         password: password,
       })
@@ -67,7 +67,7 @@ const UserModule = () => {
   const signUpAPI = () => {
     console.log(email);
     axios
-      .post("http://ec2-3-144-142-14.us-east-2.compute.amazonaws.com:3001/signup/", {
+      .post("http://localhost:3001/signup/", {
         firstName: firstName,
         lastName: lastName,
         email: email,

@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors);
 
 const mongoose = require("mongoose");
-const uri = "mongodb://ec2-3-144-142-14.us-east-2.compute.amazonaws.com:27017/";
+const uri = "mongodb://localhost:27017/";
 mongoose.connect(uri).then(console.log("Connected!"));
 
 const ProductModel = require("../models/Product");

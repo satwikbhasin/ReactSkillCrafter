@@ -1,6 +1,5 @@
 import logo from "../sb-logo.jpg";
 import satwik from "../satwik.jpeg";
-import "../App.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Navbar from "react-bootstrap/Navbar";
@@ -25,7 +24,7 @@ function AssignmentStructure() {
 
   function backEndAddition(e) {
     axios
-      .get(`http://ec2-3-144-142-14.us-east-2.compute.amazonaws.com:3001/add/${first}/and/${second}/`)
+      .get(`http://localhost:3001/add/${first}/and/${second}/`)
       .then((response) => {
         setBackendResult(Number(response.data.sum));
         console.log(response.sum);
@@ -84,7 +83,6 @@ function AssignmentStructure() {
             <Col className="col-8 mt-5">
               <h3 className="fw-bold">Satwik Bhasin</h3>
               <p className="fst-italic">
-                {" "}
                 Hello World! This is my submission for ICSI 518's 1st Lab
                 Assignment. Following is dummy text: entum, sem orci lacinia
                 ligula, in faucibus lacus dui a risus. Aliquam posuere aliquam
@@ -103,19 +101,18 @@ function AssignmentStructure() {
 
           <Form>
             <Row className="mx-5 col-xs-4 col-xs-offset-5">
-              <h4 className="rounded bg-dark bg-gradient text-light text-center">
-                {" "}
+              <h4 className="rounded bg-dark bg-gradient text-light text-center p-2">
                 Add 2 numbers:
               </h4>
             </Row>
             <Row className="mt-3">
               <Col>
-                <h5 className="me-5 ms-5 rounded bg-dark bg-gradient text-light text-center">
+                <h5 className="me-5 ms-5 rounded bg-dark bg-gradient text-light text-center p-1">
                   Enter Numbers:
                 </h5>
               </Col>
               <Col>
-                <h5 className="me-5 rounded bg-success bg-gradient text-light text-center">
+                <h5 className="me-5 rounded bg-success bg-gradient text-light text-center p-1">
                   Output:
                 </h5>
               </Col>
