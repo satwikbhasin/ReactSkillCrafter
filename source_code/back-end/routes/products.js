@@ -11,6 +11,15 @@ mongoose.connect(
 
 const ProductModel = require("../models/Product.js");
 
+router.get("/retrieve/", async (req, res) => {
+  try {
+    const products = await ProductModel.find({});
+    res.send(products);
+  } catch (err) {
+    res.send(err);
+  }
+});
+
 router.post("/insert/", async (req, res) => {
   const productName = req.body.productName;
   const productQuantity = req.body.productQuantity;
@@ -23,19 +32,9 @@ router.post("/insert/", async (req, res) => {
   });
   try {
     await product.save();
-    res.send(((success = true), (message = "Item Added!")));
+    res.status(200).send({ success: true });
   } catch (err) {
-    res.send(((success = false), (message = "Couldn't add product.")));
-    console.log(err);
-  }
-});
-
-router.get("/retrieve/", async (req, res) => {
-  try {
-    const products = await ProductModel.find({});
-    res.send(products);
-  } catch (err) {
-    console.log(err);
+    res.status(400).send({ success: false });
   }
 });
 
@@ -52,8 +51,9 @@ router.put("/update/", async (req, res) => {
         productQuantity: newQuantity,
       }
     );
+    res.status(200).send({ success: true });
   } catch (err) {
-    console.log(err);
+    res.status(400).send({ success: false });
   }
 });
 
@@ -62,8 +62,9 @@ router.delete("/delete/:id", async (req, res) => {
 
   try {
     await ProductModel.deleteOne({ _id: id });
+    res.status(200).send({ success: true });
   } catch (err) {
-    console.log(err);
+    res.status(400).send({ success: false });
   }
 });
 

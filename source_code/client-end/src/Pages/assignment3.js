@@ -17,7 +17,7 @@ function Assignment3() {
         fill
       >
         <Tab
-          eventKey="assignment3-updated-inventory-management"
+          eventKey="assignment3-inventory-management"
           title="Inventory Management"
         >
           <div style={{ display: "flex", justifyContent: "center" }}>

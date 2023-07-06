@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Axios from "axios";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
 import Table from "react-bootstrap/esm/Table";
+import {
+  retrieveProducts,
+  addProduct,
+  updateProduct,
+  deleteProduct,
+} from "../services/inventoryManagementAPI's";
 
 const InventoryManagement = () => {
   const [productList, setProductLists] = useState([]);
@@ -30,8 +35,8 @@ const InventoryManagement = () => {
   const [deletedId, setDeletedId] = useState("");
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/retrieve/").then((response) => {
-      setProductLists(response.data);
+    retrieveProducts().then((response) => {
+      setProductLists(response);
     });
   }, []);
 
@@ -39,32 +44,22 @@ const InventoryManagement = () => {
     window.location.reload(false);
   }
 
-  // Function to handle form submission for creating new inventory product
   const handleAddInventoryproduct = () => {
-    Axios.post("http://localhost:3001/insert/", {
-      productName: productName,
-      productQuantity: productQuantity,
-      productImage: productImage,
+    addProduct(productName, productQuantity, productImage).then(() => {
+      refreshPage();
     });
-    alert("Item Updated! See on 'See Products' Tab.");
-    refreshPage();
   };
 
-  // Function to handle form submission for updating an existing inventory product
   const handleUpdateInventoryProduct = () => {
-    Axios.put("http://localhost:3001/update/", {
-      id: updatedId,
-      updatedName: updatedName,
-      updatedQuantity: updatedQuantity,
+    updateProduct(updatedId, updatedName, updatedQuantity).then(() => {
+      refreshPage();
     });
-    alert("Item Added! See on 'See Products' Tab.");
-    refreshPage();
   };
 
   const handleDeleteInventoryProduct = () => {
-    Axios.delete("http://localhost:3001/delete/" + deletedId);
-    alert("Item Deleted!");
-    refreshPage();
+    deleteProduct(deletedId).then(() => {
+      refreshPage();
+    });
   };
 
   return (
@@ -73,7 +68,7 @@ const InventoryManagement = () => {
         style={{ display: "flex", justifyContent: "center" }}
         className="m-1 p-1 text-primary"
       >
-        Updated Inventory Management
+        Inventory Management
       </h1>
 
       <Tabs defaultActiveKey="seeProducts" className="" fill>

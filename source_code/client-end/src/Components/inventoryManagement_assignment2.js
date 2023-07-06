@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import Axios from "axios";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
 import Table from "react-bootstrap/esm/Table";
-import axios from "axios";
-import { retrieveProducts, addProduct} from "../services/inventoryManagementAPI's";
+import {
+  retrieveProducts,
+  addProduct,
+  updateProduct,
+} from "../services/inventoryManagementAPI's";
 
 const InventoryManagement = () => {
   var [productList, setProductLists] = useState([]);
@@ -27,8 +29,8 @@ const InventoryManagement = () => {
   const [updatedId, setUpdatedId] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:3001/products/retrieve/").then((response) => {
-      setProductLists(response.data);
+    retrieveProducts().then((response) => {
+      setProductLists(response);
     });
   }, []);
 
@@ -36,30 +38,13 @@ const InventoryManagement = () => {
     window.location.reload(false);
   }
 
-  // Function to handle form submission for creating new inventory product
   const handleAddInventoryproduct = () => {
-    Axios.post("http://localhost:3001/products/insert/", {
-      productName: productName,
-      productQuantity: productQuantity,
-      productImage: productImage,
-    }).then((response) => {
-      if (response.data.success) {
-        alert(response.data.message);
-      } else {
-        alert(response.data.message);
-      }
-    });
+    addProduct(productName, productQuantity, productImage);
     refreshPage();
   };
 
-  // Function to handle form submission for updating an existing inventory product
   const handleUpdateInventoryProduct = () => {
-    Axios.put("http://localhost:3001/products/update/", {
-      id: updatedId,
-      updatedName: updatedName,
-      updatedQuantity: updatedQuantity,
-    });
-    alert("Item Added! See on 'See Products' Tab.");
+    updateProduct(updatedId, updatedName, updatedQuantity);
     refreshPage();
   };
 
