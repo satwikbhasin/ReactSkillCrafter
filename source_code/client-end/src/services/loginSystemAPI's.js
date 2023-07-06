@@ -8,11 +8,10 @@ export const loginAPI = (email, password) => {
 };
 
 export const signUpAPI = (firstName, lastName, email, password) => {
-  return axios
-    .post("http://localhost:3001/users/signup/", {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password,
-    })
+  return axios.post("http://localhost:3001/users/signup/", {
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+    password: password,
+  });
 };

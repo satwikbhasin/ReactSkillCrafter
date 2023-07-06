@@ -6,9 +6,11 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
 import Table from "react-bootstrap/esm/Table";
+import axios from "axios";
+import { retrieveProducts, addProduct} from "../services/inventoryManagementAPI's";
 
 const InventoryManagement = () => {
-  const [productList, setProductLists] = useState([]);
+  var [productList, setProductLists] = useState([]);
   const [productName, setProductName] = useState("");
   const [productQuantity, setProductQuantity] = useState("");
   const [productImage, setProductImage] = useState("");
@@ -25,7 +27,7 @@ const InventoryManagement = () => {
   const [updatedId, setUpdatedId] = useState("");
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/products/retrieve/").then((response) => {
+    axios.get("http://localhost:3001/products/retrieve/").then((response) => {
       setProductLists(response.data);
     });
   }, []);
@@ -40,8 +42,13 @@ const InventoryManagement = () => {
       productName: productName,
       productQuantity: productQuantity,
       productImage: productImage,
+    }).then((response) => {
+      if (response.data.success) {
+        alert(response.data.message);
+      } else {
+        alert(response.data.message);
+      }
     });
-    alert("Item Updated! See on 'See Products' Tab.");
     refreshPage();
   };
 

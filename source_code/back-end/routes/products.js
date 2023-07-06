@@ -3,14 +3,13 @@ var router = express.Router();
 
 const mongoose = require("mongoose");
 mongoose.connect(
-    "mongodb+srv://satwik:aneCtJ5dCUd5ofge@satwikbhasin-assignment.dqz7zzb.mongodb.net/?retryWrites=true&w=majority",
-    {
-      useNewURLParser: true,
-    }
-  );
+  "mongodb+srv://satwik:aneCtJ5dCUd5ofge@satwikbhasin-assignment.dqz7zzb.mongodb.net/?retryWrites=true&w=majority",
+  {
+    useNewURLParser: true,
+  }
+);
 
 const ProductModel = require("../models/Product.js");
-
 
 router.post("/insert/", async (req, res) => {
   const productName = req.body.productName;
@@ -24,7 +23,9 @@ router.post("/insert/", async (req, res) => {
   });
   try {
     await product.save();
+    res.send(((success = true), (message = "Item Added!")));
   } catch (err) {
+    res.send(((success = false), (message = "Couldn't add product.")));
     console.log(err);
   }
 });

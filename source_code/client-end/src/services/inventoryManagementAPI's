@@ -1,0 +1,17 @@
+import axios from "axios";
+
+export const retrieveProducts = async () => {
+  return axios.get("http://localhost:3001/products/retrieve/");
+};
+
+export const addProduct = async (
+  productName,
+  productQuantity,
+  productImage
+) => {
+  return axios.post("http://localhost:3001/products/insert/", {
+    productName: productName,
+    productQuantity: productQuantity,
+    productImage: productImage,
+  });
+};
