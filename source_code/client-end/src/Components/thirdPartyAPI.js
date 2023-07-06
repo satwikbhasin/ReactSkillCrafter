@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
+import { getProducts } from "../services/thirdPartyAPI";
 
 const ThirdPartyAPI = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products/")
-      .then((response) => response.json())
-      .then((data) => setProducts(data));
+    getProducts().then((data) => setProducts(data));
   }, []);
 
   return (

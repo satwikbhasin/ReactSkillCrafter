@@ -74,9 +74,11 @@ const InventoryManagement = () => {
               <tbody>
                 {productList.map((product) => (
                   <tr key={product.id}>
-                    <td>{product.productName}</td>
-                    <td>{product.productQuantity}</td>
-                    <td>{product.productImage}</td>
+                    <td style={{ width: "100px" }}>{product.productName}</td>
+                    <td style={{ width: "100px" }}>
+                      {product.productQuantity}
+                    </td>
+                    <td style={{ width: "200px" }}>{product.productImage}</td>
                   </tr>
                 ))}
               </tbody>
