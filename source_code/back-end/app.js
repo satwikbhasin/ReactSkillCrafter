@@ -4,10 +4,23 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors");
+var mongoose = require("mongoose");
+
 
 var additionRouter = require('./routes/addition');
 var productsRouter = require('./routes/products');
 var usersRouter = require('./routes/users')
+
+
+
+require('dotenv').config();
+
+mongoose.connect(
+  process.env.MONGODB_URL,
+  {
+    useNewURLParser: true,
+  }
+);
 
 var app = express();
 

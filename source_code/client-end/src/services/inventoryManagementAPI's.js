@@ -1,9 +1,10 @@
 import axios from "axios";
+import backendLink from "../assets/backendLink";
 
 export const retrieveProducts = async () => {
   try {
     const response = await axios.get(
-      "http://localhost:3001/products/retrieve/"
+      `${backendLink}/products/retrieve/`
     );
     return response.data;
   } catch (error) {
@@ -18,7 +19,7 @@ export const addProduct = async (
 ) => {
   try {
     await axios
-      .post("http://localhost:3001/products/insert/", {
+      .post(`${backendLink}/products/insert/`, {
         productName: productName,
         productQuantity: productQuantity,
         productImage: productImage,
@@ -42,7 +43,7 @@ export const updateProduct = async (
 ) => {
   try {
     await axios
-      .put("http://localhost:3001/products/update/", {
+      .put(`${backendLink}/products/update/`, {
         id: updatedId,
         updatedName: updatedName,
         updatedQuantity: updatedQuantity,
@@ -62,7 +63,7 @@ export const updateProduct = async (
 export const deleteProduct = async (deletedId) => {
   try {
     await axios
-      .delete(`http://localhost:3001/products/delete/${deletedId}`)
+      .delete(`${backendLink}/products/delete/${deletedId}`)
       .then((response) => {
         console.log(response);
         if (response.data.success) {

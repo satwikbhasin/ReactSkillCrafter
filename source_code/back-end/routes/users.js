@@ -1,14 +1,6 @@
 var express = require("express");
 var router = express.Router();
 
-const mongoose = require("mongoose");
-mongoose.connect(
-  "mongodb+srv://satwik:aneCtJ5dCUd5ofge@satwikbhasin-assignment.dqz7zzb.mongodb.net/?retryWrites=true&w=majority",
-  {
-    useNewURLParser: true,
-  }
-);
-
 const UserModel = require("../models/User");
 
 router.post("/login/", async (req, res) => {
