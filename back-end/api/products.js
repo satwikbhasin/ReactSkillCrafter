@@ -24,10 +24,8 @@ router.post("/insert/", async (req, res) => {
   });
   try {
     await product.save();
-    console.log("Product added successfully.");
     res.status(200).send({ success: true });
   } catch (err) {
-    console.log("Couldn't add product." + err);
     res.status(400).send({ success: false });
   }
 });
