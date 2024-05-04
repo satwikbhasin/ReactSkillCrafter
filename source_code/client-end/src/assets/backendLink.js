@@ -1,2 +1,2 @@
-const backendLink = 'http://localhost:3001';
+const backendLink = 'https://reactskillcrafterbackend.onrender.com';
 export default backendLink;
