@@ -1,0 +1,35 @@
+services:
+  client-end:
+    build: 
+      context: ./client-end
+      dockerfile: dockerfile
+    container_name: client-end
+
+  back-end:
+    build: 
+      context: ./back-end
+      dockerfile: dockerfile
+    depends_on:
+      - mongo
+    container_name: back-end
+
+  mongo:
+    image: mongo
+    volumes:
+      - mongo-data:/data/db
+    container_name: mongo
+
+  caddy:
+    image: caddy:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    container_name: caddy
+
+volumes:
+  mongo-data:
+  caddy_data:
+  caddy_config:
