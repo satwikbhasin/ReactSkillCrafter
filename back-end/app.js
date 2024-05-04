@@ -9,7 +9,7 @@ require('dotenv').config();
 var app = express();
 
 mongoose.connect(
-  process.env.MONGODB_URL + "/data",
+  process.env.MONGODB_URL + "data",
   {
     useNewURLParser: true,
   }
