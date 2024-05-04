@@ -5,7 +5,6 @@ Developed as part of my journey to learn the MERN stack (MongoDB, Express.js, Re
 ### Backend: 
   - Powered by Express.js
   - Handles API calls and database interactions
-  - Utilizes MongoDB for data storage and retrieval
 
 ### Frontend: 
   - Crafted with React.js
