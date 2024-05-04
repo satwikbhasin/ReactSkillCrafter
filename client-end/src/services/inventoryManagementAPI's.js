@@ -24,6 +24,7 @@ export const addProduct = async (
         productImage: "Not Supported",
       })
       .then((response) => {
+        console.log(response);
         if (response.data.success) {
           alert("Product Added!");
         } else {

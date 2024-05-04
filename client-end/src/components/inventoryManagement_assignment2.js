@@ -39,15 +39,16 @@ const InventoryManagement = () => {
   }
 
   const handleAddInventoryproduct = () => {
-    addProduct(productName, productQuantity, productImage);
-    refreshPage();
+    addProduct(productName, productQuantity, productImage).then(() => {
+      refreshPage();
+    });
   };
 
   const handleUpdateInventoryProduct = () => {
-    updateProduct(updatedId, updatedName, updatedQuantity);
-    refreshPage();
+    updateProduct(updatedId, updatedName, updatedQuantity).then(() => {
+      refreshPage();
+    });
   };
-
   return (
     <>
       <h1
