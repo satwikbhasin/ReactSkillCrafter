@@ -64,7 +64,6 @@ export const deleteProduct = async (deletedId) => {
     await axios
       .delete(`${process.env.REACT_APP_BACKEND}/products/delete/${deletedId}`)
       .then((response) => {
-        console.log(response);
         if (response.data.success) {
           alert("Product Deleted!");
         } else {
