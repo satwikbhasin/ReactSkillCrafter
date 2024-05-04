@@ -17,7 +17,7 @@ const Assignment1 = () => {
     backendAddition(first, second).then((response) => {
       setBackendResult(Number(response.data.sum));
     });
-    // setBackendResponseLoading(false);
+    setBackendResponseLoading(false);
   }
 
   function frontEndAddition(e) {
