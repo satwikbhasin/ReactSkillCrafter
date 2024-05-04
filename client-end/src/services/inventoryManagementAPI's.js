@@ -1,10 +1,9 @@
 import axios from "axios";
-import backendLink from "../assets/backendLink";
 
 export const retrieveProducts = async () => {
   try {
     const response = await axios.get(
-      `${backendLink}/products/retrieve/`
+      `${process.env.REACT_APP_BACKEND}/products/retrieve/`
     );
     return response.data;
   } catch (error) {
@@ -19,7 +18,7 @@ export const addProduct = async (
 ) => {
   try {
     await axios
-      .post(`${backendLink}/products/insert/`, {
+      .post(`${process.env.REACT_APP_BACKEND}/products/insert/`, {
         productName: productName,
         productQuantity: productQuantity,
         productImage: productImage,
@@ -43,7 +42,7 @@ export const updateProduct = async (
 ) => {
   try {
     await axios
-      .put(`${backendLink}/products/update/`, {
+      .put(`${process.env.REACT_APP_BACKEND}/products/update/`, {
         id: updatedId,
         updatedName: updatedName,
         updatedQuantity: updatedQuantity,
@@ -63,7 +62,7 @@ export const updateProduct = async (
 export const deleteProduct = async (deletedId) => {
   try {
     await axios
-      .delete(`${backendLink}/products/delete/${deletedId}`)
+      .delete(`${process.env.REACT_APP_BACKEND}/products/delete/${deletedId}`)
       .then((response) => {
         console.log(response);
         if (response.data.success) {
