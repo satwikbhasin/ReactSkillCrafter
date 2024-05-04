@@ -19,8 +19,9 @@ Developed as part of my journey to learn the MERN stack (MongoDB, Express.js, Re
   - Main branch equipped with Docker for easy containerization of the application
   - Deployment-render branch tailored for Render, ensuring compatibility and smooth deployment
 
----
+## Try it out
 
-<div align="center">Demo: https://react-skill-crafter.onrender.com</div> 
-<br></br>
-<div align="center">As this deployment is free, the backend servers automatically spin down when not in use. Consequently, there may be a brief delay in fetching response from backend such as retrieving products but the servers start back up upon receiving a request.</div>
+https://react-skill-crafter.onrender.com
+
+As this deployment is free, the backend servers automatically spin down when not in use. Consequently, there may be a brief delay in fetching response from backend such as retrieving products but the servers start back up upon receiving a request.
+
