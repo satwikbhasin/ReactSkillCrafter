@@ -1,6 +1,0 @@
-https://reactskillcrafterbackend.onrender.com {
-    reverse_proxy /api/* back-end:3001  
-    reverse_proxy client-end:3000 { 
-    header_down Strict-Transport-Security max-age=31536000;
-  }
-}
