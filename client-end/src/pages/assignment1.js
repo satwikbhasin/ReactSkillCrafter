@@ -3,17 +3,21 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import NavBar from "../components/navbar";
 import satwik from "../assets/satwik.jpeg";
 import backendAddition from "../services/assignment1API";
+import "../styling/assignment1.css";
 
 const Assignment1 = () => {
   const [first, setFirst] = useState(null); //first number to be added
   const [second, setSecond] = useState(null); //second number to be added
   const [clientendResult, setClientendResult] = useState(null); //sum calculated on client end(REACT)
   const [backendResult, setBackendResult] = useState(null); //sum calculated on back end(EXPRESS)
+  const [backendResponseLoading, setBackendResponseLoading] = useState(false); //loading state for backend response
 
   function backEndAddition(e) {
+    setBackendResponseLoading(true);
     backendAddition(first, second).then((response) => {
       setBackendResult(Number(response.data.sum));
     });
+    setBackendResponseLoading(false);
   }
 
   function frontEndAddition(e) {
@@ -48,7 +52,7 @@ const Assignment1 = () => {
             justo. Nulla tempor urna non fringilla varius. In erat mi, tempus
             mattis pellentesque non, vulputate quis libero. Donec pretium
             hendrerit nulla at elementum. Aliquam sodales porta diam sit amet
-            tempus. Donec dictum finibus tempor.{" "}
+            tempus. Donec dictum finibus tempor.
           </p>
         </Col>
       </Row>
@@ -125,7 +129,7 @@ const Assignment1 = () => {
               <p1 className="fw-bold">
                 Output from client-end: {clientendResult}
               </p1>
-              <p1 className="fw-bold">Output from back-end: {backendResult}</p1>
+              <p1 className="fw-bold">{backendResponseLoading ? <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: 10 }}>Output from back-end:<div className="loader"></div></div> : <p> Output from back-end: {backendResult}</p>}</p1>
             </Row>
           </Col>
         </Row>
