@@ -12,11 +12,10 @@ const Assignment1 = () => {
   const [backendResult, setBackendResult] = useState(null); //sum calculated on back end(EXPRESS)
   const [backendResponseLoading, setBackendResponseLoading] = useState(false); //loading state for backend response
 
-  function backEndAddition(e) {
+  const backEndAddition = async (e) => {
     setBackendResponseLoading(true);
-    backendAddition(first, second).then((response) => {
-      setBackendResult(Number(response.data.sum));
-    });
+    const response = await backendAddition(first, second);
+    setBackendResult(Number(response.data.sum));
     setBackendResponseLoading(false);
   }
 
