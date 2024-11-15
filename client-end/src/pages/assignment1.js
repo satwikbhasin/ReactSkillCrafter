@@ -4,6 +4,7 @@ import Layout from "../components/layout";
 import satwik from "../assets/satwik.jpeg";
 import backendAddition from "../services/assignment1API";
 import "../styling/assignment1.css";
+import "../styling/assignment1.css";
 
 const Assignment1 = () => {
   const [first, setFirst] = useState(null); // first number to be added
