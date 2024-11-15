@@ -10,7 +10,7 @@ const ThirdPartyAPI = () => {
   }, []);
 
   return (
-    <>
+    <div className="overflow-scroll">
       <Table>
         <thead>
           <tr>
@@ -33,7 +33,7 @@ const ThirdPartyAPI = () => {
           ))}
         </tbody>
       </Table>
-    </>
+    </div>
   );
 };
 

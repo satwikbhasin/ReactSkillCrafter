@@ -16,7 +16,6 @@ const InventoryManagement = () => {
   const [productList, setProductLists] = useState([]);
   const [productName, setProductName] = useState("");
   const [productQuantity, setProductQuantity] = useState("");
-  const [productImage, setProductImage] = useState("");
 
   const [showUpdate, setShowUpdate] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
@@ -45,7 +44,7 @@ const InventoryManagement = () => {
   }
 
   const handleAddInventoryproduct = () => {
-    addProduct(productName, productQuantity, productImage).then(() => {
+    addProduct(productName, productQuantity).then(() => {
       refreshPage();
     });
   };
@@ -64,15 +63,8 @@ const InventoryManagement = () => {
 
   return (
     <>
-      <h1
-        style={{ display: "flex", justifyContent: "center" }}
-        className="m-1 p-1 text-primary"
-      >
-        Inventory Management
-      </h1>
-
-      <Tabs defaultActiveKey="seeProducts" className="" fill>
-        <Tab eventKey="seeProducts" title="See Products">
+      <Tabs defaultActiveKey="allProducts" className="" fill>
+        <Tab eventKey="allProducts" title="All Products">
           <div className="text-center">
             <h3 className="p-2 m-3 fw-bold text-success">
               ALL PRODUCTS IN INVENTORY
@@ -82,26 +74,24 @@ const InventoryManagement = () => {
                 <tr>
                   <th>Name</th>
                   <th>Quantity</th>
-                  <th>Image</th>
                 </tr>
               </thead>
               <tbody>
-                {productList.map((product) => (
+                {productList && productList.map((product) => (
                   <tr key={product.id}>
                     <td style={{ width: "100px" }}>{product.productName}</td>
                     <td style={{ width: "100px" }}>
                       {product.productQuantity}
                     </td>
-                    <td style={{ width: "200px" }}>{product.productImage}</td>
                   </tr>
                 ))}
               </tbody>
             </Table>
           </div>
         </Tab>
-        <Tab eventKey="addProduct" title="Add a Product">
+        <Tab eventKey="addProduct" title="Add Product">
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <h3 className="p-2 m-3 fw-bold text-success">ADD A PRODUCT</h3>
+            <h3 className="p-2 m-3 fw-bold text-success">ADD A PRODUCT TO INVENTORY</h3>
           </div>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Form cen>
@@ -116,46 +106,38 @@ const InventoryManagement = () => {
               <Form.Group>
                 <Form.Label>Product Quantity:</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="number"
                   onChange={(event) => setProductQuantity(event.target.value)}
                   className="mb-2"
                 />
               </Form.Group>
-              <Form.Group>
-                <Form.Label>Product Image:</Form.Label>
-                <Form.Control
-                  type="file"
-                  className="mb-4"
-                  onChange={(event) => setProductImage(event.target.value)}
-                />
-              </Form.Group>
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <Button variant="dark" onClick={handleAddInventoryproduct}>
+                <Button variant="dark" onClick={handleAddInventoryproduct} disabled={
+                  !productName || !productQuantity
+                }>
                   Add Product
                 </Button>
               </div>
             </Form>
           </div>
         </Tab>
-        <Tab eventKey="updateProduct" title="Update a Product">
+        <Tab eventKey="updateProduct" title="Update Product">
           <div className="text-center">
-            <h3 className="p-2 m-3 fw-bold text-success">UPDATE PRODUCTS</h3>
+            <h3 className="p-2 m-3 fw-bold text-success">UPDATE A PRODUCT IN INVENTORY</h3>
             <Table>
               <thead>
                 <tr>
                   <th>Name</th>
                   <th>Quantity</th>
-                  <th>Image</th>
                   <th>Update</th>
                   <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
-                {productList.map((product) => (
+                {productList && productList.map((product) => (
                   <tr key={product.id}>
                     <td>{product.productName}</td>
                     <td>{product.productQuantity}</td>
-                    <td>{product.productImage}</td>
                     <td>
                       <Button
                         size="sm"
@@ -207,13 +189,14 @@ const InventoryManagement = () => {
                 <p className="fw-bold">New Quantity:</p>
               </Form.Label>
               <Form.Control
+                type="number"
                 onChange={(event) => setUpdatedQuantity(event.target.value)}
               ></Form.Control>
             </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleCloseUpdate}>
+          <Button variant="" onClick={handleCloseUpdate}>
             Close
           </Button>
           <Button
@@ -222,6 +205,7 @@ const InventoryManagement = () => {
               handleCloseUpdate();
               handleUpdateInventoryProduct();
             }}
+            disabled={!updatedName || !updatedQuantity}
           >
             Save Changes
           </Button>
@@ -233,7 +217,7 @@ const InventoryManagement = () => {
         </Modal.Header>
         <Modal.Body>Are you sure you want to delete this product?</Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleCloseDelete}>
+          <Button variant="" onClick={handleCloseDelete}>
             Close
           </Button>
           <Button

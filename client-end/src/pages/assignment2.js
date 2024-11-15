@@ -1,32 +1,45 @@
 import React from "react";
-import { Tabs, Tab, Row } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
+import { useNavigate, useLocation } from "react-router-dom";
 import ThirdPartyAPI from "../components/thirdPartyAPI";
 import InventoryManagement from "../components/inventoryManagement_assignment2";
-import NavBar from "../components/navbar";
+import Layout from "../components/layout";
 
 const Assignment2 = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const tab = new URLSearchParams(location.search).get("tab");
+
   return (
-    <>
-      <NavBar />
-      <Row>
-        <h1 className="text-center mt-4">Assignment-2</h1>
+    <Layout>
+      <Row className="justify-content-center mb-5">
+        <Col xs="auto mb-2">
+          <Button
+            variant={tab === "3rd-party-api" || !tab ? "dark" : "outline-dark"}
+            onClick={() => navigate("?tab=3rd-party-api")}
+          >
+            3rd Party API
+          </Button>
+        </Col>
+        <Col xs="auto">
+          <Button
+            variant={tab === "inventory-management" ? "dark" : "outline-dark"}
+            onClick={() => navigate("?tab=inventory-management")}
+          >
+            Inventory Management
+          </Button>
+        </Col>
       </Row>
-      <Tabs defaultActiveKey="assignment2-api" className="m-3" fill>
-        <Tab eventKey="assignment2-api" title="3rd Party API" className="m-4">
-          <ThirdPartyAPI />
-        </Tab>
-        <Tab
-          eventKey="assignment2-inventory-management"
-          title="Inventory Management"
-        >
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <Row>
-              <InventoryManagement />
-            </Row>
-          </div>
-        </Tab>
-      </Tabs>
-    </>
+      <Row className="justify-content-center">
+        <Col xs={12} md={10}>
+          {tab === "inventory-management" ? (
+            <InventoryManagement />
+          ) : (
+            <ThirdPartyAPI />
+          )}
+        </Col>
+      </Row>
+    </Layout>
   );
 };
 

@@ -3,7 +3,7 @@ import axios from "axios";
 export const retrieveProducts = async () => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_BACKEND}/products/retrieve/`
+      `${process.env.REACT_APP_BACKEND_URL}/products/retrieve/`
     );
     return response.data;
   } catch (error) {
@@ -18,7 +18,7 @@ export const addProduct = async (
 ) => {
   try {
     await axios
-      .post(`${process.env.REACT_APP_BACKEND}/products/insert/`, {
+      .post(`${process.env.REACT_APP_BACKEND_URL}/products/insert/`, {
         productName: productName,
         productQuantity: productQuantity,
         productImage: productImage,
@@ -42,7 +42,7 @@ export const updateProduct = async (
 ) => {
   try {
     await axios
-      .put(`${process.env.REACT_APP_BACKEND}/products/update/`, {
+      .put(`${process.env.REACT_APP_BACKEND_URL}/products/update/`, {
         id: updatedId,
         updatedName: updatedName,
         updatedQuantity: updatedQuantity,
@@ -62,7 +62,7 @@ export const updateProduct = async (
 export const deleteProduct = async (deletedId) => {
   try {
     await axios
-      .delete(`${process.env.REACT_APP_BACKEND}/products/delete/${deletedId}`)
+      .delete(`${process.env.REACT_APP_BACKEND_URL}/products/delete/${deletedId}`)
       .then((response) => {
         if (response.data.success) {
           alert("Product Deleted!");

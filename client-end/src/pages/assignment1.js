@@ -1,26 +1,31 @@
 import React, { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import NavBar from "../components/navbar";
+import Layout from "../components/layout";
 import satwik from "../assets/satwik.jpeg";
 import backendAddition from "../services/assignment1API";
 import "../styling/assignment1.css";
 
 const Assignment1 = () => {
-  const [first, setFirst] = useState(null); //first number to be added
-  const [second, setSecond] = useState(null); //second number to be added
-  const [clientendResult, setClientendResult] = useState(null); //sum calculated on client end(REACT)
-  const [backendResult, setBackendResult] = useState(null); //sum calculated on back end(EXPRESS)
-  const [backendResponseLoading, setBackendResponseLoading] = useState(false); //loading state for backend response
+  const [first, setFirst] = useState(null); // first number to be added
+  const [second, setSecond] = useState(null); // second number to be added
+  const [clientendResult, setClientendResult] = useState(null); // sum calculated on client end (REACT)
+  const [backendResult, setBackendResult] = useState(null); // sum calculated on backend (EXPRESS)
+  const [backendResponseLoading, setBackendResponseLoading] = useState(false); // loading state for backend response
 
-  function backEndAddition(e) {
+  const backEndAddition = async () => {
     setBackendResponseLoading(true);
-    backendAddition(first, second).then((response) => {
-      setBackendResult(Number(response.data.sum));
-    });
-    setBackendResponseLoading(false);
-  }
+    await backendAddition(first, second)
+      .then((response) => {
+        setBackendResult(Number(response.data.sum));
+        setBackendResponseLoading(false);
+      })
+      .catch((error) => {
+        setBackendResult("Error connecting to backend");
+        setBackendResponseLoading(false);
+      });
+  };
 
-  function frontEndAddition(e) {
+  function frontEndAddition() {
     setClientendResult(Number(first) + Number(second));
   }
 
@@ -29,20 +34,18 @@ const Assignment1 = () => {
     backEndAddition();
     frontEndAddition();
   }
-  return (
-    <>
-      <NavBar />
-      <h1 className="text-center mt-4">Assignment-1</h1>
-      <Row className="mb-5">
-        <Col className="col-3 ms-5 mt-2">
-          <img class="" src={satwik} width={300} height={300} rounded alt="" />
-        </Col>
 
-        <Col className="col-8 mt-5">
+  return (
+    <Layout>
+      <Row className="mb-5 justify-content-center">
+        <Col sm={12} md={4} className="text-center">
+          <img src={satwik} width="100%" style={{ maxWidth: "300px", marginBottom: "4vh" }} alt="Satwik Bhasin" />
+        </Col>
+        <Col sm={12} md={8}>
           <h3 className="fw-bold">Satwik Bhasin</h3>
           <p className="fst-italic">
             Hello World! This is my submission for ICSI 518's 1st Lab
-            Assignment. Following is dummy text: entum, sem orci lacinia ligula,
+            Assignment. Following is dummy text entum, sem orci lacinia ligula,
             in faucibus lacus dui a risus. Aliquam posuere aliquam congue. Lorem
             ipsum dolor sit amet, consectetur adipiscing elit. Proin pulvinar
             est sit amet dui scelerisque, et dignissim turpis dictum. Donec
@@ -56,85 +59,50 @@ const Assignment1 = () => {
           </p>
         </Col>
       </Row>
+      <hr />
+      <Row className="justify-content-center">
+        <h4 className="text-center mb-3 mt-5 fw-bold">
+          Add 2 numbers using both front-end (React) and back-end (Express)
+        </h4>
+      </Row>
+      <Row className="justify-content-center">
+        <Col xs={8} md={4} className="border pt-3 pb-3">
+          <Form onSubmit={addButtonHandler}>
+            <h5 className="fw-bold mb-4">Enter Numbers</h5>
+            <Form.Group className="mb-3">
+              <Form.Label className="fw-bold">1st Number:</Form.Label>
+              <Form.Control
+                type="number"
+                onChange={(event) => setFirst(event.target.value)}
+              />
+            </Form.Group>
 
-      <Form>
-        <Row className="mx-5 col-xs-4 col-xs-offset-5">
-          <h4 className="rounded bg-dark bg-gradient text-light text-center p-2">
-            Add 2 numbers:
-          </h4>
-        </Row>
-        <Row className="mt-3">
-          <Col>
-            <h5 className="me-5 ms-5 rounded bg-dark bg-gradient text-light text-center p-1">
-              Enter Numbers:
-            </h5>
-          </Col>
-          <Col>
-            <h5 className="me-5 rounded bg-success bg-gradient text-light text-center p-1">
-              Output:
-            </h5>
-          </Col>
-        </Row>
-        <Row className="mt-1">
-          <Col>
-            <Row>
-              <Col>
-                <Form.Group className="mx-5 mb-3">
-                  <Form.Label>
-                    <p1 className="fw-bold">1st Number:</p1>
-                  </Form.Label>
-                  <Form.Control
-                    class="form-control form-control-sm"
-                    onChange={(event) => {
-                      setFirst(event.target.value);
-                    }}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
+            <Form.Group className="mb-3">
+              <Form.Label className="fw-bold">2nd Number:</Form.Label>
+              <Form.Control
+                type="number"
+                onChange={(event) => setSecond(event.target.value)}
+              />
+            </Form.Group>
 
-            <Row>
-              <Col>
-                <Form.Group className="mx-5 mb-1">
-                  <Form.Label>
-                    <p1 className="fw-bold">2nd Number:</p1>
-                  </Form.Label>
-                  <Form.Control
-                    class="form-control form-control-sm"
-                    onChange={(event) => {
-                      setSecond(event.target.value);
-                    }}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
-
-            <Row>
-              <Col>
-                <Form.Group className="mx-5 mt-2">
-                  <Button
-                    variant="dark"
-                    type="submit"
-                    onClick={addButtonHandler}
-                    className="mb-3"
-                  >
-                    Add
-                  </Button>
-                </Form.Group>
-              </Col>
-            </Row>
-          </Col>
-          <Col>
-            <Row>
-              <p1 className="fw-bold">
-                Output from client-end: {clientendResult}
-              </p1>
-              <p1 className="fw-bold">{backendResponseLoading ? <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: 10 }}>Output from back-end:<div className="loader"></div></div> : <p> Output from back-end: {backendResult}</p>}</p1>
-            </Row>
-          </Col>
-        </Row>
-      </Form>
-    </>
+            <Form.Group>
+              <Button variant="dark" type="submit" disabled={!first || !second}>
+                Add
+              </Button>
+            </Form.Group>
+          </Form>
+        </Col>
+        <Col xs={8} md={4} className="border pt-3 pb-3">
+          <h5 className="fw-bold mb-4">Output</h5>
+          <p>
+            <strong>Front-End Result:</strong> {clientendResult}
+          </p>
+          <p>
+            <strong>Back-End Result:</strong> {backendResponseLoading ? <span className="loader ms-1"></span> : backendResult}
+          </p>
+        </Col>
+      </Row>
+    </Layout>
   );
 };
 

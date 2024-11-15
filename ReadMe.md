@@ -1,4 +1,4 @@
-<div align="center"><h1>About React Skill Crafter</h1></div>
+<div align="center"><h1>Satwik Bhasin - My First Website</h1></div>
 
 Developed as part of my journey to learn the MERN stack (MongoDB, Express.js, React.js, Node.js). The project incorporates various functionalities:
 

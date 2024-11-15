@@ -1,0 +1,32 @@
+.navbar {
+  background-color: rgb(36, 36, 36);
+  color: white;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 3vh;
+  padding-right: 3vh;
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link,
+.navbar .nav-item,
+.navbar .navbar-text,
+.navbar .nav-dropdown .nav-link {
+  color: white;
+}
+
+.nav-dropdown .dropdown-menu {
+  background-color: rgb(36, 36, 36);
+  right: 0;
+  left: auto;
+  transform: translateX(0%);
+}
+
+.nav-dropdown .dropdown-item {
+  color: white;
+}
+
+.nav-dropdown .dropdown-item:hover {
+  background-color: rgb(50, 50, 50);
+}

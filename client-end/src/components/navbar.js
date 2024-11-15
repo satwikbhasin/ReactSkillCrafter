@@ -1,10 +1,22 @@
 import React from "react";
-import { Navbar, Image, NavDropdown, Nav } from "react-bootstrap";
-import logo from "../assets/sb-logo.jpg";
+import { Navbar, Image, Nav, NavDropdown } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
+import logo from "../assets/SB.png";
+import "../styling/navbar.css";
+
+const assignments = [
+  { title: "Assignment 1", link: "/assignment1" },
+  { title: "Assignment 2", link: "/assignment2" },
+  { title: "Assignment 3", link: "/assignment3" },
+  { title: "Home", link: "/" },
+];
 
 export const NavBar = () => {
+  const location = useLocation();
+  const currentAssignment = assignments.find(assignment => assignment.link === location.pathname);
+
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar className="navbar">
       <Navbar.Brand href="/">
         <Image
           src={logo}
@@ -15,20 +27,24 @@ export const NavBar = () => {
           className="ms-2 mt-2 mb-2"
           alt=""
         />
-        <text className="ms-2">Satwik Bhasin - ICSI 518 Lab Assignments</text>
+        <span className="ms-2">My First Website</span>
       </Navbar.Brand>
-      <Nav>
-        <NavDropdown
-          title="Assignments"
-          id="assignments-dropdown"
-          menuVariant="dark"
-        >
-          <NavDropdown.Item href="/assignment1">Assignment 1</NavDropdown.Item>
-          <NavDropdown.Item href="/assignment2">Assignment 2</NavDropdown.Item>
-          <NavDropdown.Item href="/assignment3">Assignment 3</NavDropdown.Item>
-        </NavDropdown>
+      <Navbar.Toggle />
+      <Nav className="ml-auto">
+        {currentAssignment && (
+          <NavDropdown title={currentAssignment.title} id="basic-nav-dropdown" className="nav-dropdown">
+            {assignments
+              .filter(assignment => assignment.link !== location.pathname)
+              .map((assignment, index) => (
+                <NavDropdown.Item key={index} href={assignment.link}>
+                  {assignment.title}
+                </NavDropdown.Item>
+              ))}
+          </NavDropdown>
+        )}
       </Nav>
     </Navbar>
   );
 };
+
 export default NavBar;

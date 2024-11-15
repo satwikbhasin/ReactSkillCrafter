@@ -1,5 +1,5 @@
 staticSites:
-  - name: react-skill-crafter
+  - name: satwik-bhasin-my-first-website
     buildCommand: npm run build
     publishDir: build
     routes:
