@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <div align="center"><h1>About React Skill Crafter</h1></div>
+=======
+<div align="center"><h1>Satwik Bhasin - My First Website</h1></div>
+>>>>>>> origin/main
 
 Developed as part of my journey to learn the MERN stack (MongoDB, Express.js, React.js, Node.js). The project incorporates various functionalities:
 
@@ -23,3 +27,7 @@ Developed as part of my journey to learn the MERN stack (MongoDB, Express.js, Re
 https://react-skill-crafter.onrender.com
 
 As this deployment is free, the backend servers automatically spin down when not in use. Consequently, there may be a brief delay in fetching response from backend such as retrieving products but the servers start back up upon receiving a request.
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
