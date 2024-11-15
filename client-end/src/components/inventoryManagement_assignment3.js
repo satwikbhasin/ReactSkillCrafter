@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Tabs from "react-bootstrap/Tabs";
-import Tab from "react-bootstrap/Tab";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/esm/Button";
-import Modal from "react-bootstrap/Modal";
-import Table from "react-bootstrap/esm/Table";
+import { Tabs, Tab, Form, Button, Modal, Table } from "react-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   retrieveProducts,
   addProduct,
@@ -13,25 +9,26 @@ import {
 } from "../services/inventoryManagementAPI's";
 
 const InventoryManagement = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const searchParams = new URLSearchParams(location.search);
+  const defaultTab = searchParams.get("inventoryTab") || "allProducts";
+
   const [productList, setProductLists] = useState([]);
   const [productName, setProductName] = useState("");
   const [productQuantity, setProductQuantity] = useState("");
-
   const [showUpdate, setShowUpdate] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
+  const [updatedName, setUpdatedName] = useState("");
+  const [updatedQuantity, setUpdatedQuantity] = useState("");
+  const [updatedId, setUpdatedId] = useState("");
+  const [deletedId, setDeletedId] = useState("");
 
   const handleCloseUpdate = () => setShowUpdate(false);
   const handleShowUpdate = () => setShowUpdate(true);
 
   const handleCloseDelete = () => setShowDelete(false);
-  const handleShowDelete = () => {
-    setShowDelete(true);
-  };
-
-  const [updatedName, setUpdatedName] = useState("");
-  const [updatedQuantity, setUpdatedQuantity] = useState("");
-  const [updatedId, setUpdatedId] = useState("");
-  const [deletedId, setDeletedId] = useState("");
+  const handleShowDelete = () => setShowDelete(true);
 
   useEffect(() => {
     retrieveProducts().then((response) => {
@@ -39,11 +36,7 @@ const InventoryManagement = () => {
     });
   }, []);
 
-  function refreshPage() {
-    window.location.reload(false);
-  }
-
-  const handleAddInventoryproduct = () => {
+  const handleAddInventoryProduct = () => {
     addProduct(productName, productQuantity).then(() => {
       refreshPage();
     });
@@ -61,9 +54,18 @@ const InventoryManagement = () => {
     });
   };
 
+  const handleSelect = (key) => {
+    searchParams.set("inventoryTab", key);
+    navigate({ search: searchParams.toString() });
+  };
+
+  const refreshPage = () => {
+    window.location.reload(false);
+  };
+
   return (
     <>
-      <Tabs defaultActiveKey="allProducts" className="" fill>
+      <Tabs activeKey={defaultTab} onSelect={handleSelect} fill>
         <Tab eventKey="allProducts" title="All Products">
           <div className="text-center">
             <h3 className="p-2 m-3 fw-bold text-success">
@@ -77,24 +79,27 @@ const InventoryManagement = () => {
                 </tr>
               </thead>
               <tbody>
-                {productList && productList.map((product) => (
-                  <tr key={product.id}>
-                    <td style={{ width: "100px" }}>{product.productName}</td>
-                    <td style={{ width: "100px" }}>
-                      {product.productQuantity}
-                    </td>
-                  </tr>
-                ))}
+                {productList &&
+                  productList.map((product) => (
+                    <tr key={product.id}>
+                      <td style={{ width: "100px" }}>{product.productName}</td>
+                      <td style={{ width: "100px" }}>
+                        {product.productQuantity}
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </Table>
           </div>
         </Tab>
         <Tab eventKey="addProduct" title="Add Product">
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <h3 className="p-2 m-3 fw-bold text-success">ADD A PRODUCT TO INVENTORY</h3>
+            <h3 className="p-2 m-3 fw-bold text-success">
+              ADD A PRODUCT TO INVENTORY
+            </h3>
           </div>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <Form cen>
+            <Form>
               <Form.Group>
                 <Form.Label>Product Name:</Form.Label>
                 <Form.Control
@@ -112,9 +117,11 @@ const InventoryManagement = () => {
                 />
               </Form.Group>
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <Button variant="dark" onClick={handleAddInventoryproduct} disabled={
-                  !productName || !productQuantity
-                }>
+                <Button
+                  variant="dark"
+                  onClick={handleAddInventoryProduct}
+                  disabled={!productName || !productQuantity}
+                >
                   Add Product
                 </Button>
               </div>
@@ -123,7 +130,9 @@ const InventoryManagement = () => {
         </Tab>
         <Tab eventKey="updateProduct" title="Update Product">
           <div className="text-center">
-            <h3 className="p-2 m-3 fw-bold text-success">UPDATE A PRODUCT IN INVENTORY</h3>
+            <h3 className="p-2 m-3 fw-bold text-success">
+              UPDATE A PRODUCT IN INVENTORY
+            </h3>
             <Table>
               <thead>
                 <tr>
@@ -134,36 +143,37 @@ const InventoryManagement = () => {
                 </tr>
               </thead>
               <tbody>
-                {productList && productList.map((product) => (
-                  <tr key={product.id}>
-                    <td>{product.productName}</td>
-                    <td>{product.productQuantity}</td>
-                    <td>
-                      <Button
-                        size="sm"
-                        variant="success"
-                        onClick={() => {
-                          handleShowUpdate();
-                          setUpdatedId(product._id);
-                        }}
-                      >
-                        Update
-                      </Button>
-                    </td>
-                    <td>
-                      <Button
-                        size="sm"
-                        variant="danger"
-                        onClick={() => {
-                          setDeletedId(product._id);
-                          handleShowDelete();
-                        }}
-                      >
-                        Delete
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
+                {productList &&
+                  productList.map((product) => (
+                    <tr key={product.id}>
+                      <td>{product.productName}</td>
+                      <td>{product.productQuantity}</td>
+                      <td>
+                        <Button
+                          size="sm"
+                          variant="success"
+                          onClick={() => {
+                            handleShowUpdate();
+                            setUpdatedId(product._id);
+                          }}
+                        >
+                          Update
+                        </Button>
+                      </td>
+                      <td>
+                        <Button
+                          size="sm"
+                          variant="danger"
+                          onClick={() => {
+                            setDeletedId(product._id);
+                            handleShowDelete();
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </Table>
           </div>

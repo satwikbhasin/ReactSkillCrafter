@@ -11,7 +11,7 @@ const InventoryManagement = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
-  const defaultTab = searchParams.get("inventory") || "allProducts";
+  const defaultTab = searchParams.get("inventoryTab") || "allProducts";
 
   const [productList, setProductLists] = useState([]);
   const [productName, setProductName] = useState("");
@@ -43,7 +43,7 @@ const InventoryManagement = () => {
   };
 
   const handleSelect = (key) => {
-    searchParams.set("inventory", key);
+    searchParams.set("inventoryTab", key);
     navigate({ search: searchParams.toString() });
   };
 

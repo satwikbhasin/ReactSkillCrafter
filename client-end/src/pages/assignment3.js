@@ -8,23 +8,23 @@ import Layout from "../components/layout";
 const Assignment3 = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const tab = new URLSearchParams(location.search).get("tab");
+  const assignmentTab = new URLSearchParams(location.search).get("assignmentTab");
 
   return (
     <Layout>
       <Row className="justify-content-center mb-5">
         <Col xs="auto mb-2">
           <Button
-            variant={tab === "inventory-management" || !tab ? "dark" : "outline-dark"}
-            onClick={() => navigate("?tab=inventory-management")}
+            variant={assignmentTab === "inventory" || !assignmentTab ? "dark" : "outline-dark"}
+            onClick={() => navigate("?assignmentTab=inventory")}
           >
             Inventory Management
           </Button>
         </Col>
         <Col xs="auto">
           <Button
-            variant={tab === "user-module" ? "dark" : "outline-dark"}
-            onClick={() => navigate("?tab=user-module")}
+            variant={assignmentTab === "user-module" ? "dark" : "outline-dark"}
+            onClick={() => navigate("?assignmentTab=user-module")}
           >
             Login System
           </Button>
@@ -32,7 +32,7 @@ const Assignment3 = () => {
       </Row>
       <Row className="justify-content-center">
         <Col xs={12} md={10}>
-          {tab === "user-module" ? (
+          {assignmentTab === "user-module" ? (
             <LoginSystem />
           ) : (
             <InventoryManagement />

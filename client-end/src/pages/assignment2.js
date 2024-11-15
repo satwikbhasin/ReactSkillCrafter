@@ -8,23 +8,23 @@ import Layout from "../components/layout";
 const Assignment2 = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const tab = new URLSearchParams(location.search).get("tab");
+  const assignmentTab = new URLSearchParams(location.search).get("assignmentTab");
 
   return (
     <Layout>
       <Row className="justify-content-center mb-5">
         <Col xs="auto mb-2">
           <Button
-            variant={tab === "3rd-party-api" || !tab ? "dark" : "outline-dark"}
-            onClick={() => navigate("?tab=3rd-party-api")}
+            variant={assignmentTab === "3rd-party-api" || !assignmentTab ? "dark" : "outline-dark"}
+            onClick={() => navigate("?assignmentTab=3rd-party-api")}
           >
             3rd Party API
           </Button>
         </Col>
         <Col xs="auto">
           <Button
-            variant={tab === "inventory-management" ? "dark" : "outline-dark"}
-            onClick={() => navigate("?tab=inventory-management")}
+            variant={assignmentTab === "inventory" ? "dark" : "outline-dark"}
+            onClick={() => navigate("?assignmentTab=inventory")}
           >
             Inventory Management
           </Button>
@@ -32,7 +32,7 @@ const Assignment2 = () => {
       </Row>
       <Row className="justify-content-center">
         <Col xs={12} md={10}>
-          {tab === "inventory-management" ? (
+          {assignmentTab === "inventory" ? (
             <InventoryManagement />
           ) : (
             <ThirdPartyAPI />
