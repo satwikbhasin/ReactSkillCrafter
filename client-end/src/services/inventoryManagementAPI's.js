@@ -21,7 +21,7 @@ export const addProduct = async (
       .post(`${process.env.REACT_APP_BACKEND_URL}/products/insert/`, {
         productName: productName,
         productQuantity: productQuantity,
-        productImage: productImage,
+        productImage: "Not Supported",
       })
       .then((response) => {
         if (response.data.success) {

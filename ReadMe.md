@@ -23,4 +23,7 @@ Developed as part of my journey to learn the MERN stack (MongoDB, Express.js, Re
 https://react-skill-crafter.onrender.com
 
 As this deployment is free, the backend servers automatically spin down when not in use. Consequently, there may be a brief delay in fetching response from backend such as retrieving products but the servers start back up upon receiving a request.
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/main

@@ -10,6 +10,7 @@ const LoginSystem = () => {
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(true);
   const [sessionActive, setSessionActive] = useState(false);
+  const [loading, setLoading] = useState(false);
   const userDetails = {
     firstName: "",
     lastName: "",
@@ -27,8 +28,10 @@ const LoginSystem = () => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
+    setLoading(true);
     if (isLogin) {
       loginAPI(email, password).then((response) => {
+        setLoading(false);
         if (response.data.isValid) {
           alert("Login Successful for: " + response.data.firstName);
           setSessionActive(true);
@@ -42,6 +45,7 @@ const LoginSystem = () => {
       });
     } else {
       signUpAPI(firstName, lastName, email, password).then((response) => {
+        setLoading(false);
         if (response.data.success) {
           alert(response.data.message);
           setIsLogin(true);
@@ -126,8 +130,8 @@ const LoginSystem = () => {
                   />
                 </Form.Group>
                 <Row className="text-center">
-                  <Button variant="dark" type="submit" className="mt-4">
-                    {isLogin ? "Login" : "Sign Up"}
+                  <Button variant="dark" type="submit" className="mt-4" disabled={loading}>
+                    {loading ? <span className="loader"></span> : isLogin ? "Login" : "Sign Up"}
                   </Button>
                 </Row>
               </Form>
