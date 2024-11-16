@@ -1,247 +1,216 @@
 import React, { useState, useEffect } from "react";
-import { Tabs, Tab, Form, Button, Modal, Table } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Form, Button, Modal, Table, Container, Row, Col } from "react-bootstrap";
+import { PencilSquare, Plus, Trash } from 'react-bootstrap-icons';
 import {
   retrieveProducts,
   addProduct,
   updateProduct,
-  deleteProduct,
+  deleteProduct
 } from "../services/inventoryManagementAPI's";
 
 const InventoryManagement = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const searchParams = new URLSearchParams(location.search);
-  const defaultTab = searchParams.get("inventoryTab") || "allProducts";
-
   const [productList, setProductLists] = useState([]);
-  const [productName, setProductName] = useState("");
-  const [productQuantity, setProductQuantity] = useState("");
-  const [showUpdate, setShowUpdate] = useState(false);
-  const [showDelete, setShowDelete] = useState(false);
-  const [updatedName, setUpdatedName] = useState("");
-  const [updatedQuantity, setUpdatedQuantity] = useState("");
-  const [updatedId, setUpdatedId] = useState("");
-  const [deletedId, setDeletedId] = useState("");
+  const [product, setProduct] = useState({ name: "", quantity: "" });
+  const [updatingProduct, setUpdatingProduct] = useState({ name: "", quantity: "" });
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleCloseUpdate = () => setShowUpdate(false);
-  const handleShowUpdate = () => setShowUpdate(true);
+  const handleCloseAdd = () => setShowAddModal(false);
+  const handleShowAdd = () => {
+    setProduct({ name: "", quantity: "" });
+    setShowAddModal(true);
+  };
 
-  const handleCloseDelete = () => setShowDelete(false);
-  const handleShowDelete = () => setShowDelete(true);
+  const handleCloseUpdate = () => setShowUpdateModal(false);
+  const handleShowUpdate = (product) => {
+    setProduct(product);
+    setUpdatingProduct(product);
+    setShowUpdateModal(true);
+  };
 
   useEffect(() => {
-    retrieveProducts().then((response) => {
-      setProductLists(response);
-    });
+    fetchProducts();
   }, []);
 
-  const handleAddInventoryProduct = () => {
-    addProduct(productName, productQuantity).then(() => {
-      refreshPage();
-    });
+  const fetchProducts = async () => {
+    setLoading(true);
+    const response = await retrieveProducts();
+    setProductLists(response);
+    setLoading(false);
   };
 
-  const handleUpdateInventoryProduct = () => {
-    updateProduct(updatedId, updatedName, updatedQuantity).then(() => {
-      refreshPage();
-    });
+  const handleAddInventoryProduct = async () => {
+    setLoading(true);
+    await addProduct(product.name, product.quantity);
+    await fetchProducts();
+    setShowAddModal(false);
+    setLoading(false);
   };
 
-  const handleDeleteInventoryProduct = () => {
-    deleteProduct(deletedId).then(() => {
-      refreshPage();
-    });
+  const handleDeleteInventoryProduct = async (productId) => {
+    setLoading(true);
+    await deleteProduct(productId);
+    await fetchProducts();
+    setLoading(false);
   };
 
-  const handleSelect = (key) => {
-    searchParams.set("inventoryTab", key);
-    navigate({ search: searchParams.toString() });
-  };
-
-  const refreshPage = () => {
-    window.location.reload(false);
+  const handleUpdateInventoryProduct = async () => {
+    setLoading(true);
+    await updateProduct(product._id, product.name, product.quantity);
+    await fetchProducts();
+    setShowUpdateModal(false);
+    setLoading(false);
   };
 
   return (
-    <>
-      <Tabs activeKey={defaultTab} onSelect={handleSelect} fill>
-        <Tab eventKey="allProducts" title="All Products">
+    <Container>
+      <Row className="justify-content-center">
+        <Col xs={12} md={10}>
           <div className="text-center">
-            <h3 className="p-2 m-3 fw-bold text-success">
-              ALL PRODUCTS IN INVENTORY
-            </h3>
-            <Table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Quantity</th>
-                </tr>
-              </thead>
-              <tbody>
-                {productList &&
-                  productList.map((product) => (
-                    <tr key={product.id}>
-                      <td style={{ width: "100px" }}>{product.productName}</td>
-                      <td style={{ width: "100px" }}>
-                        {product.productQuantity}
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </Table>
-          </div>
-        </Tab>
-        <Tab eventKey="addProduct" title="Add Product">
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <h3 className="p-2 m-3 fw-bold text-success">
-              ADD A PRODUCT TO INVENTORY
-            </h3>
-          </div>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <Form>
-              <Form.Group>
-                <Form.Label>Product Name:</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(event) => setProductName(event.target.value)}
-                  className="mb-2"
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>Product Quantity:</Form.Label>
-                <Form.Control
-                  type="number"
-                  onChange={(event) => setProductQuantity(event.target.value)}
-                  className="mb-2"
-                />
-              </Form.Group>
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <Button
-                  variant="dark"
-                  onClick={handleAddInventoryProduct}
-                  disabled={!productName || !productQuantity}
-                >
-                  Add Product
-                </Button>
-              </div>
-            </Form>
-          </div>
-        </Tab>
-        <Tab eventKey="updateProduct" title="Update Product">
-          <div className="text-center">
-            <h3 className="p-2 m-3 fw-bold text-success">
-              UPDATE A PRODUCT IN INVENTORY
-            </h3>
-            <Table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Quantity</th>
-                  <th>Update</th>
-                  <th>Delete</th>
-                </tr>
-              </thead>
-              <tbody>
-                {productList &&
-                  productList.map((product) => (
-                    <tr key={product.id}>
-                      <td>{product.productName}</td>
-                      <td>{product.productQuantity}</td>
-                      <td>
-                        <Button
-                          size="sm"
-                          variant="success"
-                          onClick={() => {
-                            handleShowUpdate();
-                            setUpdatedId(product._id);
-                          }}
-                        >
-                          Update
-                        </Button>
-                      </td>
-                      <td>
-                        <Button
+            <div className="d-flex align-items-center justify-content-between mb-5">
+              <h1 className="fw-bold">Inventory</h1>
+              <Button variant="success" onClick={handleShowAdd}>
+                <Plus size={20} className="me-1" />
+                <span className="fw-bold">Product</span>
+              </Button>
+            </div>
+            {loading ? (
+              <div className="loader"></div>
+            ) : (
+              <Table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {productList &&
+                    productList.map((product) => (
+                      <tr key={product.id}>
+                        <td style={{ width: "100px" }}>{product.productName}</td>
+                        <td style={{ width: "100px" }}>
+                          {product.productQuantity}
+                        </td>
+                        <td style={{ width: "100px" }}>
+                          <Button
+                            size="sm"
+                            variant="warning"
+                            onClick={() => handleShowUpdate(product)}
+                          >
+                            <PencilSquare />
+                          </Button>
+                        </td>
+                        <td style={{ width: "100px" }}>
+                         <Button
                           size="sm"
                           variant="danger"
                           onClick={() => {
-                            setDeletedId(product._id);
-                            handleShowDelete();
+                            handleDeleteInventoryProduct(product._id);
                           }}
                         >
-                          Delete
+                          <Trash/>
                         </Button>
                       </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </Table>
+                      </tr>
+                    ))}
+                </tbody>
+              </Table>
+            )}
           </div>
-        </Tab>
-      </Tabs>
-      <Modal show={showUpdate} onHide={handleCloseUpdate}>
+        </Col>
+      </Row>
+
+      {/* Add Product Modal */}
+      <Modal centered show={showAddModal} onHide={handleCloseAdd}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Product</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Product Name</Form.Label>
+              <Form.Control
+                type="text"
+                value={product.name}
+                onChange={(event) => setProduct({ ...product, name: event.target.value })}
+                className="mb-2"
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Product Quantity</Form.Label>
+              <Form.Control
+                type="number"
+                value={product.quantity}
+                onChange={(event) => setProduct({ ...product, quantity: event.target.value })}
+                className="mb-2"
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="" onClick={handleCloseAdd} className="fw-bold">
+            Close
+          </Button>
+          <Button
+            variant="success"
+            onClick={handleAddInventoryProduct}
+            disabled={!product.name || !product.quantity || loading}
+            className="fw-bold"
+          >
+            {loading ? <span className="loader"></span> : "Add"}
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Update Product Modal */}
+      <Modal centered show={showUpdateModal} onHide={handleCloseUpdate}>
         <Modal.Header closeButton>
           <Modal.Title>Update Product</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group>
-              <Form.Label>
-                <p className="fw-bold">New Name:</p>
-              </Form.Label>
+              <Form.Label>New Name</Form.Label>
               <Form.Control
+                type="text"
+                value={product.name}
+                onChange={(event) => setProduct({ ...product, name: event.target.value })}
                 className="mb-3"
-                onChange={(event) => setUpdatedName(event.target.value)}
-              ></Form.Control>
+              />
             </Form.Group>
             <Form.Group>
-              <Form.Label>
-                <p className="fw-bold">New Quantity:</p>
-              </Form.Label>
+              <Form.Label>New Quantity</Form.Label>
               <Form.Control
                 type="number"
-                onChange={(event) => setUpdatedQuantity(event.target.value)}
-              ></Form.Control>
+                value={product.quantity}
+                onChange={(event) => setProduct({ ...product, quantity: event.target.value })}
+              />
             </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="" onClick={handleCloseUpdate}>
+          <Button variant="" onClick={handleCloseUpdate} className="fw-bold">
             Close
           </Button>
           <Button
-            variant="success"
-            onClick={() => {
-              handleCloseUpdate();
-              handleUpdateInventoryProduct();
-            }}
-            disabled={!updatedName || !updatedQuantity}
+            variant="warning"
+            onClick={handleUpdateInventoryProduct}
+            className="fw-bold"
+            disabled={
+              loading ||
+              (product.name === updatingProduct.name &&
+                product.quantity === updatingProduct.quantity || (!product.name && !product.quantity))
+            }
           >
-            Save Changes
+            {loading ? <span className="loader"></span> : "Update"}
           </Button>
         </Modal.Footer>
       </Modal>
-      <Modal show={showDelete} onHide={handleCloseDelete}>
-        <Modal.Header closeButton>
-          <Modal.Title>Delete Product</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Are you sure you want to delete this product?</Modal.Body>
-        <Modal.Footer>
-          <Button variant="" onClick={handleCloseDelete}>
-            Close
-          </Button>
-          <Button
-            variant="danger"
-            onClick={() => {
-              handleCloseDelete();
-              handleDeleteInventoryProduct();
-            }}
-          >
-            Yes, Delete!
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
+    </Container>
   );
 };
 
