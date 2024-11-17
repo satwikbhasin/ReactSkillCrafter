@@ -20,8 +20,6 @@ Developed as part of my journey to learn the MERN stack (MongoDB, Express.js, Re
 
 - Originally deployed on Amazon EC2, now migrated to Render.com for hosting
 
-## Try it out
-
-https://react-skill-crafter.onrender.com
+## Try it out [here](https://reactpilot.vercel.app)
 
 As this deployment is free, the backend servers automatically spin down when not in use. Consequently, there may be a brief delay in fetching response from backend such as retrieving products but the servers start back up upon receiving a request.
