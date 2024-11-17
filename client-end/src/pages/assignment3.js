@@ -1,8 +1,8 @@
 import React from "react";
 import { Button, Row, Col } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router-dom";
-import InventoryManagement from "../components/inventoryManagement_assignment3";
-import LoginSystem from "../components/loginSystem";
+import InventoryManagement from "../components/assignment3/inventoryManagement_assignment3";
+import LoginSystem from "../components/assignment3/loginSystem";
 import Layout from "../components/layout";
 
 const Assignment3 = () => {
@@ -12,7 +12,15 @@ const Assignment3 = () => {
 
   return (
     <Layout>
-      <Row className="justify-content-center mb-5">
+<div className="text-left border p-5">
+  <h1 className="display-4">Assignment 3</h1>
+  <p className="lead">
+    <strong>The first part</strong> is to add DELETE operation to the inventory system.
+    <br />
+    <strong>The second part</strong> is to implement user authentication. This includes creating user login and signup pages, a profile page for logged-in users, and maintaining user sessions.
+  </p>
+</div>
+      <Row className="justify-content-center mt-5 mb-5">
         <Col xs="auto mb-2">
           <Button
             variant={assignmentTab === "inventory" || !assignmentTab ? "dark" : "outline-dark"}

@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../components/layout";
-import AssignmentCard from "../components/assignmentCard";
+import AssignmentCard from "../components/home/assignmentCard";
+import { Github } from "react-bootstrap-icons";
 import "../styling/assignment-card.css";
 
 const assignments = [
@@ -17,20 +18,15 @@ const assignments = [
     title: "Assignment 2",
     summary: [
       "Integrate a third-party API into your application & display data in a user-friendly manner",
-      "Create an inventory management system",
-      "Implement CREATE & READ operations for the inventory",
-      "Handle asynchronous operations and manage state effectively"
+      "Create an inventory management system and implement CREATE, READ & UPDATE operations for the inventory"
     ],
     link: "/assignment2"
   },
   {
     title: "Assignment 3",
     summary: [
-      "Add UPDATE and DELETE operations to the inventory system",
-      "Implement user authentication",
-      "Create user login & signup pages",
-      "Create a profile page for logged-in users",
-      "Maintain user session",
+      "Add DELETE operations to the inventory system",
+      "Implement user authentication including user login & signup pages, a profile page for logged-in users, and maintaining user sessions"
     ],
     link: "/assignment3"
   }
@@ -39,20 +35,25 @@ const assignments = [
 const Home = () => {
   return (
     <Layout>
-      <div>
-        <h1 className="text-center small-heading">
-          Select an assignment below
-        </h1>
-        <div className="assignment-cards-container">
-          {assignments.map((assignment, index) => (
-            <AssignmentCard
-              key={index}
-              title={assignment.title}
-              summary={assignment.summary}
-              link={assignment.link}
-            />
-          ))}
+      <div className="border p-5 position-relative">
+        <h1 className="display-4 text-center">Welcome to My First Website</h1>
+        <p className="lead text-left">
+          I built this while learning the MERN stack as a part of my ICSI 518 Software Engineering class at UAlbany. This project consists of a series of gradual assignments designed to help you learn the MERN stack step-by-step. Each assignment builds on the previous one, introducing new concepts and techniques to enhance your understanding of full-stack development.
+        </p>
+        Refer to the code on <a href="https://github.com/satwikbhasin/my-first-website" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', display: "inline-block", marginLeft: '5px' }}><Github /> GitHub</a>
+        <div style={{ position: 'absolute', bottom: '10px', right: '10px', fontSize: '12px', color: '#888' }}>
+          Created by <a href="https://satwikbhasin.com" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: '#2FB883' }}>Satwik Bhasin</a>
         </div>
+      </div>
+      <div className="assignment-cards-container">
+        {assignments.map((assignment, index) => (
+          <AssignmentCard
+            key={index}
+            title={assignment.title}
+            summary={assignment.summary}
+            link={assignment.link}
+          />
+        ))}
       </div>
     </Layout>
   );

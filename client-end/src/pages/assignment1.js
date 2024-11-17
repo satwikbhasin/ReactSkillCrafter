@@ -38,7 +38,17 @@ const Assignment1 = () => {
 
   return (
     <Layout>
-      <Row className="mb-5 justify-content-center">
+      <div className="text-left border p-5">
+        <h1 className="display-4">Assignment 1</h1>
+        <p className="lead">
+          <strong>The first part</strong> is to create a basic React app with a Node.js and Express.js backend.
+          <br />
+          <strong>The second part</strong> is to display an image along with a heading and some information.
+          <br />
+          <strong>The third part</strong> is to add two numbers using both the frontend and backend.
+        </p>
+      </div>
+      <Row className="mt-5 mb-5 justify-content-center">
         <Col sm={12} md={4} className="text-center">
           <img src={satwik} width="100%" style={{ maxWidth: "300px", marginBottom: "4vh" }} alt="Satwik Bhasin" />
         </Col>

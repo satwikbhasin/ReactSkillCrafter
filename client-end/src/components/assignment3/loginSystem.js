@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import Cookies from "js-cookie";
-import { loginAPI, signUpAPI } from "../services/loginSystemAPI's";
+import { loginAPI, signUpAPI } from "../../services/loginSystemAPI's";
 
 const LoginSystem = () => {
   const [firstName, setFirstName] = useState("");

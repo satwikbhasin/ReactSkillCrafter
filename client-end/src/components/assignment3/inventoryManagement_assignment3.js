@@ -6,7 +6,7 @@ import {
   addProduct,
   updateProduct,
   deleteProduct
-} from "../services/inventoryManagementAPI's";
+} from "../../services/inventoryManagementAPI's";
 
 const InventoryManagement = () => {
   const [productList, setProductLists] = useState([]);

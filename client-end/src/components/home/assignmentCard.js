@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import "../styling/assignment-card.css";
+import "../../styling/assignment-card.css";
 
 const AssignmentCard = ({ title, summary, link }) => {
     return (
