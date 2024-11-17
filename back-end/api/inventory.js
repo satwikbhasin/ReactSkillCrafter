@@ -1,9 +1,9 @@
 var express = require("express");
 var router = express.Router();
 
-const ProductModel = require("../models/Product.js");
+const ProductModel = require("../database-models/product.js");
 
-router.get("/retrieve/", async (req, res) => {
+router.get("/getAllProducts/", async (req, res) => {
   try {
     const products = await ProductModel.find({});
     res.send(products);
@@ -12,15 +12,13 @@ router.get("/retrieve/", async (req, res) => {
   }
 });
 
-router.post("/insert/", async (req, res) => {
+router.post("/insertProduct/", async (req, res) => {
   const productName = req.body.productName;
   const productQuantity = req.body.productQuantity;
-  const productImage = req.body.productImage;
 
   const product = new ProductModel({
     productName: productName,
     productQuantity: productQuantity,
-    productImage: productImage,
   });
   try {
     await product.save();
