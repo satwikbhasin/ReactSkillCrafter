@@ -68,33 +68,34 @@ The project is organized into two main directories: `back-end` and `front-end`.
 ### Setup
 
 1. **Clone the repository:**
+
    ```sh
    git clone https://github.com/satwikbhasin/react-pilot
    cd react-pilot
-
 2. **Backend Setup:**
+
    ```sh
    cd back-end
    npm install
-   
 3. **Frontend Setup:**
+
    ```sh
    cd ../front-end
    npm install
-
 ### Running the Project
 
 1. **Start the backend server:**
+
    ```sh
    cd back-end
    npm start
-
 2. **Start the frontend server:**
+
    ```sh
    cd ../front-end
    npm start
-   
 3. **Open your browser and navigate to:**
+
    ```sh
    http://localhost:3000
 
