@@ -58,6 +58,23 @@ The project is organized into two main directories: `back-end` and `front-end`.
 - `.env`: Environment variables for the frontend.
 - `package.json`: Frontend dependencies and scripts.
 
+### Environment Variables
+
+Both the frontend and backend use environment variables to manage configuration settings.
+
+#### back-end
+
+- **.env**: Contains environment variables for the backend.
+  - `PORT`: The port number on which the backend server runs.
+  - `MONGODB_URI`: The connection string for MongoDB.
+
+#### front-end
+
+- **.env**: Contains environment variables for the frontend.
+  - `REACT_APP_BACKEND_URL`: The URL of the backend server.
+
+These environment variables are essential for configuring the application to run correctly in different environments (development, production, etc.).
+
 ## Instructions to Use the Project
 
 ### Prerequisites
@@ -100,20 +117,3 @@ The project is organized into two main directories: `back-end` and `front-end`.
    http://localhost:3000
 
 You should now see the React Pilot application running locally.
-
-### Environment Variables
-
-Both the frontend and backend use environment variables to manage configuration settings.
-
-#### back-end
-
-- **.env**: Contains environment variables for the backend.
-  - `PORT`: The port number on which the backend server runs.
-  - `MONGODB_URI`: The connection string for MongoDB.
-
-#### front-end
-
-- **.env**: Contains environment variables for the frontend.
-  - `REACT_APP_BACKEND_URL`: The URL of the backend server.
-
-These environment variables are essential for configuring the application to run correctly in different environments (development, production, etc.).
