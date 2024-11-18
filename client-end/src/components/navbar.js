@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Image, Nav, NavDropdown } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
-import logo from "../assets/SB.png";
+import logo from "../assets/react.png";
 import "../styling/navbar.css";
 
 const assignments = [
@@ -20,19 +20,19 @@ export const NavBar = () => {
       <Navbar.Brand href="/">
         <Image
           src={logo}
-          width={50}
-          height={50}
+          width={40}
+          height={40}
           rounded
           fluid
           className="ms-2 mt-2 mb-2"
           alt=""
         />
-        <span className="ms-2">My First Website</span>
+        <span className="ms-2 fw-bold">React Pilot</span>
       </Navbar.Brand>
       <Navbar.Toggle />
       <Nav className="ml-auto">
         {currentAssignment && (
-          <NavDropdown title={currentAssignment.title} id="basic-nav-dropdown" className="nav-dropdown">
+          <NavDropdown title={currentAssignment.title} id="basic-nav-dropdown" className="nav-dropdown fw-bold">
             {assignments
               .filter(assignment => assignment.link !== location.pathname)
               .map((assignment, index) => (

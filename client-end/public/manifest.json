@@ -1,6 +1,7 @@
 {
-  "short_name": "Satwik's First Website",
-  "name": "Satwik's First Website",
+  "short_name": "React Pilot",
+  "name": "React Pilot",
+  "description": "React Pilot is a responsive web application developed using the MERN stack (MongoDB, Express, React, Node.js). It serves as a great starting point for learning and building full-stack applications. Explore various projects and assignments to get hands-on experience with the MERN stack.",
   "icons": [
     {
       "src": "favicon.ico",

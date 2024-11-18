@@ -25,6 +25,7 @@
 
 .nav-dropdown .dropdown-item {
   color: white;
+  font-weight: 600;
 }
 
 .nav-dropdown .dropdown-item:hover {

@@ -36,7 +36,7 @@ const Home = () => {
   return (
     <Layout>
       <div className="border p-5 position-relative">
-        <h1 className="display-4 text-center">Welcome to My First Website</h1>
+        <h1 className="display-4 text-center">Welcome to React Pilot</h1>
         <p className="lead text-left">
           I built this while learning the MERN stack as a part of my ICSI 518 Software Engineering class at UAlbany. This project consists of a series of gradual assignments designed to help you learn the MERN stack step-by-step. Each assignment builds on the previous one, introducing new concepts and techniques to enhance your understanding of full-stack development.
         </p>
