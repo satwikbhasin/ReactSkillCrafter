@@ -9,7 +9,7 @@ import "../styling/assignment1.css";
 const Assignment1 = () => {
   const [first, setFirst] = useState(null); // first number to be added
   const [second, setSecond] = useState(null); // second number to be added
-  const [clientendResult, setClientendResult] = useState(null); // sum calculated on client end (REACT)
+  const [frontendResult, setFrontendResult] = useState(null); // sum calculated on front end (REACT)
   const [backendResult, setBackendResult] = useState(null); // sum calculated on backend (EXPRESS)
   const [backendResponseLoading, setBackendResponseLoading] = useState(false); // loading state for backend response
 
@@ -27,7 +27,7 @@ const Assignment1 = () => {
   };
 
   function frontEndAddition() {
-    setClientendResult(Number(first) + Number(second));
+    setFrontendResult(Number(first) + Number(second));
   }
 
   function addButtonHandler(e) {
@@ -106,7 +106,7 @@ const Assignment1 = () => {
         <Col xs={8} md={4} className="border pt-3 pb-3">
           <h5 className="fw-bold mb-4">Output</h5>
           <p>
-            <strong>Front-End Result:</strong> {clientendResult}
+            <strong>Front-End Result:</strong> {frontendResult}
           </p>
           <p>
             <strong>Back-End Result:</strong> {backendResponseLoading ? <span className="loader ms-1"></span> : backendResult}
