@@ -1,6 +1,8 @@
 <div align="center"><h1>React Pilot</h1></div>
 
-Developed as part of my journey to learn the MERN stack (MongoDB, Express.js, React.js, Node.js). The project incorporates various functionalities:
+I built this while learning the MERN stack as a part of my ICSI 518 Software Engineering class at UAlbany. This project consists of a series of gradual assignments designed to help you learn the MERN stack step-by-step. Each assignment builds on the previous one, introducing new concepts and techniques to enhance your understanding of full-stack development.
+
+## Try it out [here](https://reactpilot.vercel.app)
 
 ### Backend:
 
@@ -18,6 +20,4 @@ Developed as part of my journey to learn the MERN stack (MongoDB, Express.js, Re
 
 ### Deployment:
 
-- Originally deployed on Amazon EC2, now migrated to Render.com for hosting
-
-## Try it out [here](https://reactpilot.vercel.app)
+- Originally deployed on Amazon EC2, now migrated to Vercel for hosting
