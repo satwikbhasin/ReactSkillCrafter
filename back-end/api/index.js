@@ -27,13 +27,6 @@ app.use('/addition', additionRoute);
 app.use('/inventory', inventoryRoute);
 app.use('/users', usersRoute);
 
-app.get("/env", (req, res) => {
-    res.json({
-        MONGODB_URI: process.env.MONGODB_URI,
-        PORT: process.env.PORT
-    })
-});
-
 app.listen(port);
 
 module.exports = app;

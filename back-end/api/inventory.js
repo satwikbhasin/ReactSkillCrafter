@@ -8,7 +8,7 @@ router.get("/getAllProducts/", async (req, res) => {
     const products = await ProductModel.find({});
     res.send(products);
   } catch (err) {
-    res.send(err);
+    res.status(500).send(err);
   }
 });
 
@@ -28,7 +28,7 @@ router.post("/insertProduct/", async (req, res) => {
   }
 });
 
-router.put("/update/", async (req, res) => {
+router.put("/updateProduct/", async (req, res) => {
   const newName = req.body.updatedName;
   const newQuantity = req.body.updatedQuantity;
   const id = req.body.id;
@@ -47,7 +47,7 @@ router.put("/update/", async (req, res) => {
   }
 });
 
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/deleteProduct/:id", async (req, res) => {
   const id = req.params.id;
 
   try {

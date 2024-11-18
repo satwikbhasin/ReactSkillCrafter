@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('../config/database');
 const bcrypt = require("bcrypt");
 
 const UserSchema = new mongoose.Schema({
@@ -24,7 +24,6 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-// Hash the password before saving to database
 UserSchema.pre("save", async function (next) {
   const user = this;
   if (!user.isModified("password")) {
@@ -36,7 +35,6 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
-// Compare the password with the hashed password in the database
 UserSchema.methods.comparePassword = async function (candidatePassword) {
   const user = this;
   return bcrypt.compare(candidatePassword, user.password);
