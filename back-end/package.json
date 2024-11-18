@@ -1,7 +1,7 @@
 {
-  "name": "react-pilot-back-end",
+  "name": "back-end",
   "version": "0.0.0",
-  "main": "index.js",
+  "main": "api/index.js",
   "scripts": {
     "start": "node api/index.js",
     "dev": "nodemon api/index.js"
@@ -10,7 +10,6 @@
     "bcrypt": "^5.1.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
-    "debug": "~2.6.9",
     "dotenv": "^16.4.5",
     "express": "~4.16.1",
     "express-session": "^1.17.3",
