@@ -1,5 +1,5 @@
 {
-  "name": "back-end",
+  "name": "react-pilot-back-end",
   "version": "0.0.0",
   "main": "api/index.js",
   "scripts": {
